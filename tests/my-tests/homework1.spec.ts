@@ -1,25 +1,29 @@
 import { test, expect } from "@playwright/test";
 
+const loginName = "ozera123456789@gmail.com";
+const loginPass = "R4gnZxg.J7U7EX";
+
+test.beforeEach(async ({ page }) => {
+  // Перевикористали конструкцію в конфіг файлі, з заміною в test browser на page
+  // const context = await browser.newContext({
+  //   httpCredentials: {
+  //     username: "guest",
+  //     password: "welcome2qauto",
+  //   },
+  // });
+  // const page = await context.newPage();
+  await page.goto("/panel/garage");
+  await page.locator('button:has-text("Sign In")').click();
+  await page.fill("input[name='email']", loginName);
+  await page.fill("input[name='password']", loginPass);
+  await page.locator('button:has-text("Login")').click();
+  await expect(page.locator("div.panel-page_heading h1")).toHaveText("Garage");
+});
+
 test.describe("Adding and Deleting check", () => {
   test.describe.configure({ mode: "serial" });
 
   test("Add car", async ({ page }) => {
-    // Перевикористали конструкцію в конфіг файлі, з заміною в test browser на page
-    // const context = await browser.newContext({
-    //   httpCredentials: {
-    //     username: "guest",
-    //     password: "welcome2qauto",
-    //   },
-    // });
-    // const page = await context.newPage();
-    await page.goto("/panel/garage");
-    await page.locator('button:has-text("Sign In")').click();
-    await page.fill("input[name='email']", "ozera123456789@gmail.com");
-    await page.fill("input[name='password']", "R4gnZxg.J7U7EX");
-    await page.locator('button:has-text("Login")').click();
-    await expect(page.locator("div.panel-page_heading h1")).toHaveText(
-      "Garage"
-    );
     await page.locator('button:has-text("Add car")').click();
     await page.selectOption("select#addCarBrand", "Fiat");
     await page.selectOption("select#addCarModel", "Ducato");
@@ -31,22 +35,6 @@ test.describe("Adding and Deleting check", () => {
   });
 
   test("Delete a car", async ({ page }) => {
-    // Перевикористали конструкцію в конфіг файлі, з заміною в test browser на page
-    // const context = await browser.newContext({
-    //   httpCredentials: {
-    //     username: "guest",
-    //     password: "welcome2qauto",
-    //   },
-    // });
-    // const page = await context.newPage();
-    await page.goto("/panel/garage");
-    await page.locator('button:has-text("Sign In")').click();
-    await page.fill("input[name='email']", "ozera123456789@gmail.com");
-    await page.fill("input[name='password']", "R4gnZxg.J7U7EX");
-    await page.locator('button:has-text("Login")').click();
-    await expect(page.locator("div.panel-page_heading h1")).toHaveText(
-      "Garage"
-    );
     if (await page.locator("span.icon-edit").first().isVisible()) {
       await page.locator("button.btn-edit").first().click();
       await page.locator('button:has-text("Remove car")').click();

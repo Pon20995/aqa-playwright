@@ -62,7 +62,7 @@ test.describe("Verification of qauto app", () => {
     // soft assertion
     await expect
       .soft(page.locator("div.invalid-feedback p"))
-      .toContainText("bla-bla");
+      .toContainText("Password required");
     await page.locator("input[name='password']").fill(loginPass);
     await page.getByRole("button", { name: "Login" }).click();
     await page.waitForURL("/panel/garage");

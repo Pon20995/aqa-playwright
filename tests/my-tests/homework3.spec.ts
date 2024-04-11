@@ -19,115 +19,121 @@ test.beforeEach(async ({ page }) => {
   );
 });
 
-test.describe("Validation of registartion form", () => {
-  test.describe.configure({ mode: "serial" });
+test.describe(
+  "Validation of registartion form",
+  {
+    tag: ["@registration"],
+  },
+  () => {
+    test.describe.configure({ mode: "serial" });
 
-  test("Check the registration fields validation with empty data", async ({
-    page,
-  }) => {
-    const registrationpage = new RegistrationPage(page);
-    await registrationpage.clickNameInput();
-    await registrationpage.clickLastNameInput();
-    await registrationpage.clickEmailInput();
-    await registrationpage.clickPassInput();
-    await registrationpage.clickReenterPassInput();
-    await registrationpage.clickNameInput();
-    await registrationpage.checkFieldsIfEmpty();
-  });
+    test("Check the registration fields validation with empty data", async ({
+      page,
+    }) => {
+      const registrationpage = new RegistrationPage(page);
+      await registrationpage.clickNameInput();
+      await registrationpage.clickLastNameInput();
+      await registrationpage.clickEmailInput();
+      await registrationpage.clickPassInput();
+      await registrationpage.clickReenterPassInput();
+      await registrationpage.clickNameInput();
+      await registrationpage.checkFieldsIfEmpty();
+    });
 
-  test("Check the registration fields validation with invalid data", async ({
-    page,
-  }) => {
-    const registrationpage = new RegistrationPage(page);
-    const incorrectNames = [
-      "Іван",
-      "Pet-ro",
-      "Mar ia",
-      "J7ohn",
-      "Li#ana",
-      "123",
-      "@#!",
-      " Olexander",
-      "Olexander ",
-      "   ",
-    ];
-    for (const name of incorrectNames) {
-      await registrationpage.checkNameIfInvalid(name);
-    }
+    test("Check the registration fields validation with invalid data", async ({
+      page,
+    }) => {
+      const registrationpage = new RegistrationPage(page);
+      const incorrectNames = [
+        "Іван",
+        "Pet-ro",
+        "Mar ia",
+        "J7ohn",
+        "Li#ana",
+        "123",
+        "@#!",
+        " Olexander",
+        "Olexander ",
+        "   ",
+      ];
+      for (const name of incorrectNames) {
+        await registrationpage.checkNameIfInvalid(name);
+      }
 
-    const incorrectLastNames = [
-      "Шевченко",
-      "Kvitk_a",
-      "Ukrain ka",
-      "5Tychyna",
-      "123",
-      "@#!",
-      " Osnovyanenko",
-      "Dibrova ",
-      "   ",
-    ];
-    for (const lastName of incorrectLastNames) {
-      await registrationpage.checkLastNameIfInvalid(lastName);
-    }
+      const incorrectLastNames = [
+        "Шевченко",
+        "Kvitk_a",
+        "Ukrain ka",
+        "5Tychyna",
+        "123",
+        "@#!",
+        " Osnovyanenko",
+        "Dibrova ",
+        "   ",
+      ];
+      for (const lastName of incorrectLastNames) {
+        await registrationpage.checkLastNameIfInvalid(lastName);
+      }
 
-    const incorrectEmails = [
-      "user@domain",
-      "user@domain.",
-      "user@.domain.com",
-      "user@domain..com",
-      "user@domain@.com",
-      "user@domain.",
-      "user@domain.com@",
-      "user@domain..com",
-      "user@domaincom",
-      "user@domain,com",
-      "user(domain.com",
-      "user@domain.com ",
-      " user@domain.com",
-      "    ",
-    ];
-    for (const email of incorrectEmails) {
-      await registrationpage.checkEmailIfInvalid(email);
-    }
+      const incorrectEmails = [
+        "user@domain",
+        "user@domain.",
+        "user@.domain.com",
+        "user@domain..com",
+        "user@domain@.com",
+        "user@domain.",
+        "user@domain.com@",
+        "user@domain..com",
+        "user@domaincom",
+        "user@domain,com",
+        "user(domain.com",
+        "user@domain.com ",
+        " user@domain.com",
+        "    ",
+      ];
+      for (const email of incorrectEmails) {
+        await registrationpage.checkEmailIfInvalid(email);
+      }
 
-    const incorrectPass = [
-      "1qwertY",
-      "1qwertY1qwertY1qwertY",
-      "1qwerty1qwerty",
-      "qwertYqwertY",
-      "12345678",
-      "pa$$w0rd",
-      "PASSWORD",
-    ];
-    for (const password of incorrectPass) {
-      await registrationpage.checkPassIfInvalid(password);
-    }
+      const incorrectPass = [
+        "1qwertY",
+        "1qwertY1qwertY1qwertY",
+        "1qwerty1qwerty",
+        "qwertYqwertY",
+        "12345678",
+        "pa$$w0rd",
+        "PASSWORD",
+      ];
+      for (const password of incorrectPass) {
+        await registrationpage.checkPassIfInvalid(password);
+      }
 
-    await registrationpage.checkReenterPassIfInvalid();
-  });
+      await registrationpage.checkReenterPassIfInvalid();
+    });
 
-  test("Check the registration fields validation with wrong length data", async ({
-    page,
-  }) => {
-    const registrationpage = new RegistrationPage(page);
-    const wrongLengthData = ["e", "qwertyuiopqwertyuiopq"];
-    for (const data of wrongLengthData) {
-      await registrationpage.checkFieldsLength(data);
-    }
-  });
+    test("Check the registration fields validation with wrong length data", async ({
+      page,
+    }) => {
+      const registrationpage = new RegistrationPage(page);
+      const wrongLengthData = ["e", "qwertyuiopqwertyuiopq"];
+      for (const data of wrongLengthData) {
+        await registrationpage.checkFieldsLength(data);
+      }
+    });
 
-  test("Check the registration with valid data", async ({ page }) => {
-    const registrationpage = new RegistrationPage(page);
-    await registrationpage.registerWithValidData(userEmail, userPassword);
-  });
+    test("Check the registration with valid data", async ({ page }) => {
+      const registrationpage = new RegistrationPage(page);
+      await registrationpage.registerWithValidData(userEmail, userPassword);
+    });
 
-  test("Login with previously registered data", async ({ page }) => {
-    const loginpage = new LoginPage(page);
-    await page.getByRole("button", { name: "Close" }).click();
-    await loginpage.loginWithDynamicData(userEmail, userPassword);
-    await page.click("div.modal-footer button.btn-primary");
-    await expect(page.locator("div.panel-page_heading h1")).toHaveText(
-      "Garage"
-    );
-  });
-});
+    test("Login with previously registered data", async ({ page }) => {
+      const loginpage = new LoginPage(page);
+      await page.getByRole("button", { name: "Close" }).click();
+      await loginpage.loginWithDynamicData(userEmail, userPassword);
+      await page.click("div.modal-footer button.btn-primary");
+      await expect(page.locator("div.panel-page_heading h1")).toHaveText(
+        "Garage"
+      );
+    });
+  }
+);

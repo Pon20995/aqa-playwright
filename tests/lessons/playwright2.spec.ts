@@ -31,7 +31,7 @@ test("Test with valid data", async ({ page }) => {
 
   await expect(page.getByText("Porsche Panamera")).toBeVisible();
   await expect(page.locator("app-car")).toContainText(
-    "Update mileage • 08.04.2024"
+    "Update mileage • 11.04.2024"
   );
 });
 

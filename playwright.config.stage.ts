@@ -35,6 +35,11 @@ export default defineConfig({
     ignoreHTTPSErrors: true,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
+    viewport: { width: 1600, height: 1000 },
+    locale: "de-DE",
+    timezoneId: "Europe/Berlin",
+    permissions: ["geolocation"],
+    geolocation: { longitude: 52.150002, latitude: 10.333333 },
   },
 
   /* Configure projects for major browsers */
@@ -44,15 +49,15 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"] },
     },
 
-    {
-      name: "firefox",
-      use: { ...devices["Desktop Firefox"] },
-    },
+    // {
+    //   name: "firefox",
+    //   use: { ...devices["Desktop Firefox"] },
+    // },
 
-    {
-      name: "webkit",
-      use: { ...devices["Desktop Safari"] },
-    },
+    // {
+    //   name: "webkit",
+    //   use: { ...devices["Desktop Safari"] },
+    // },
 
     /* Test against mobile viewports. */
     // {

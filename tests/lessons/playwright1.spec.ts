@@ -80,6 +80,21 @@ test.describe(
       const textOnGaragePage = page.locator(".panel-page h1");
       await textOnGaragePage.waitFor({ state: "visible" });
       await expect(textOnGaragePage).toContainText("Garage");
+      await page.evaluate(() => {
+        localStorage.setItem("key-my1", "value-my1");
+      });
+      const readLSVal = await page.evaluate(() => {
+        return localStorage.getItem("key-my1");
+      });
+      console.log(`data from local storage: ${readLSVal}`);
+      // page evaluate for session storage
+      await page.evaluate(() => {
+        sessionStorage.setItem("session-key-my-2", "session-value-my-2");
+      });
+      const readSessVal = await page.evaluate(() => {
+        return sessionStorage.getItem("session-key-my-2");
+      });
+      console.log(`data from session storage: ${readSessVal}`);
     });
 
     test(

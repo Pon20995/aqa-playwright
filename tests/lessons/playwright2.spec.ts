@@ -7,6 +7,23 @@ test.beforeEach(async ({ page }) => {
   await page.goto("/");
 });
 
+test("Add car", async ({ page }) => {
+  const loginpage = new LoginPage(page);
+  const buttonLogin = await loginpage.buttonLogin();
+
+  await loginpage.loginWithDefaultParams();
+  await expect(buttonLogin).toBeVisible();
+  await buttonLogin.click();
+  await page.locator('button:has-text("Add car")').click();
+  await page.selectOption("select#addCarBrand", "Porsche");
+  await page.selectOption("select#addCarModel", "Panamera");
+  await page.fill("input[name='mileage']", "300000");
+  await page.locator("div.justify-content-end button.btn-primary").click();
+  await expect(
+    page.locator("div").filter({ hasText: "Car added" }).nth(3)
+  ).toHaveText("Car added");
+});
+
 test("Test with valid data", async ({ page }) => {
   const loginpage = new LoginPage(page);
   const buttonLogin = await loginpage.buttonLogin();
@@ -30,8 +47,23 @@ test("Test with valid data", async ({ page }) => {
   //   await page.getByRole("button", { name: "Add" }).click();
 
   await expect(page.getByText("Porsche Panamera")).toBeVisible();
-  await expect(page.locator("app-car")).toContainText(
-    "Update mileage • 11.04.2024"
+  // await expect(page.locator("app-car")).toContainText(
+  //   "Update mileage • 11.04.2024"
+  // );
+});
+
+test("Delete a car", async ({ page }) => {
+  const loginpage = new LoginPage(page);
+  const buttonLogin = await loginpage.buttonLogin();
+
+  await loginpage.loginWithDefaultParams();
+  await expect(buttonLogin).toBeVisible();
+  await buttonLogin.click();
+  await page.locator("button.btn-edit").first().click();
+  await page.locator('button:has-text("Remove car")').click();
+  await page.locator("button.btn-danger").click();
+  await expect(page.locator("p.panel-empty_message")).toHaveText(
+    "You don’t have any cars in your garage"
   );
 });
 

@@ -12,7 +12,7 @@ configDotenv({ path: `env/.env.${process.env.ENV}` });
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: "./tests/my-tests",
+  testDir: "./tests/lessons",
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -23,15 +23,15 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
-    ["./myReporter.ts"],
+    // ["./myReporter.ts"],
     ["list"],
-    ["html", { open: "never" }],
-    [
-      "@testomatio/reporter/lib/adapter/playwright.js",
-      {
-        apiKey: process.env.TESTOMATIO,
-      },
-    ],
+    // ["html", { open: "never" }],
+    // [
+    //   "@testomatio/reporter/lib/adapter/playwright.js",
+    //   {
+    //     apiKey: process.env.TESTOMATIO,
+    //   },
+    // ],
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {

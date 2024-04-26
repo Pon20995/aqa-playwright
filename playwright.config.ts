@@ -12,7 +12,8 @@ configDotenv({ path: `env/.env.${process.env.ENV}` });
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: "./tests/lessons",
+  globalSetup: "./global-setup", //for storage state usage
+  testDir: "./tests/my-tests",
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -44,9 +45,10 @@ export default defineConfig({
     },
     ignoreHTTPSErrors: true,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: "retain-on-first-failure",
-    screenshot: "only-on-failure",
-    video: "retain-on-failure",
+    // trace: "retain-on-first-failure",
+    // screenshot: "only-on-failure",
+    // video: "retain-on-failure",
+    storageState: "./loginAuth.json", //storage state usage
   },
 
   /* Configure projects for major browsers */

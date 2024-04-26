@@ -1,4 +1,4 @@
-import { test, expect } from "./util/fixtures";
+import { test, expect } from "../../util/fixtures";
 
 test("test", async ({ loginPage, page }) => {
   await loginPage.openPage();

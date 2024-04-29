@@ -10,8 +10,8 @@ test.afterAll(async () => {
   await page.close();
 });
 
-const loginName = process.env.LOGIN_USERNAME;
-const loginPass = process.env.LOGIN_PASS;
+const loginName = process.env.LOGIN_USERNAME || "";
+const loginPass = process.env.LOGIN_PASS || "";
 
 test.describe(
   "Verification of qauto app",

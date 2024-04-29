@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
-const loginName = process.env.LOGIN_USERNAME;
-const loginPass = process.env.LOGIN_PASS;
+const loginName = process.env.LOGIN_USERNAME || "";
+const loginPass = process.env.LOGIN_PASS || "";
 
 test.beforeEach(async ({ page }) => {
   // Перевикористали конструкцію в конфіг файлі, з заміною в test browser на page

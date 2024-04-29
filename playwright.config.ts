@@ -12,7 +12,7 @@ configDotenv({ path: `env/.env.${process.env.ENV}` });
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  globalSetup: "./global-setup", //for storage state usage
+  // globalSetup: "./global-setup", //for storage state usage
   testDir: "./tests/my-tests",
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -40,15 +40,15 @@ export default defineConfig({
     baseURL: process.env.ENV_URL,
     // baseURL: "https://qauto.forstudy.space",
     httpCredentials: {
-      username: process.env.HTTP_CREDENTIALS_USERNAME,
-      password: process.env.HTTP_CREDENTIALS_PASSWORD,
+      username: process.env.HTTP_CREDENTIALS_USERNAME || "",
+      password: process.env.HTTP_CREDENTIALS_PASSWORD || "",
     },
     ignoreHTTPSErrors: true,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     // trace: "retain-on-first-failure",
     // screenshot: "only-on-failure",
     // video: "retain-on-failure",
-    storageState: "./loginAuth.json", //storage state usage
+    // storageState: "./loginAuth.json", //storage state usage
   },
 
   /* Configure projects for major browsers */

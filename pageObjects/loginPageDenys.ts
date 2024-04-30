@@ -28,10 +28,10 @@ export class LoginPage {
     await expect(this.logoInHeader).toBeVisible();
     await this.signInButton.click();
     await this.inputEmail.click();
-    await this.inputEmail.fill("densf22@gmail.com");
+    await this.inputEmail.fill("ozera123456789@gmail.com");
     // click input for password
     await this.inputPass.click();
-    await this.inputPass.fill("Qwerty+1");
+    await this.inputPass.fill("R4gnZxg.J7U7EX");
     await this.loginButtonForm.click();
   }
 

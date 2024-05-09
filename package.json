@@ -4,12 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "ENV=dev npx playwright test /my-tests/homework1.spec.ts  --project=chromium --workers=1 --ui"
+    "pretest": "npx jest api-testing/login.test.ts",
+    "test": "npx jest api-testing/user.test.ts",
+    "posttest": "echo 'tests finished'",
+    "run-playwright-ui-tests": "ENV=dev npx playwright test /my-tests/homework1.spec.ts  --project=chromium --workers=1 --ui"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
     "@playwright/test": "^1.43.0",
     "@testomatio/reporter": "^1.4.0",
     "@types/fs-extra": "^11.0.4",

@@ -9,7 +9,7 @@
     "posttest": "echo 'tests finished'",
     "run-playwright-ui-tests": "ENV=dev npx playwright test /my-tests/homework2.spec.ts  --project=chromium --workers=1 --ui",
     "run-playwright-tests": "ENV=dev npx playwright test /my-tests/homework2.spec.ts  --project=chromium --workers=1",
-    "run-playwright-tests-noenv": "npx playwright test example.spec.ts  --project=chromium --workers=1 --config playwright.config.dev.ts"
+    "run-playwright-tests-with-config": "npx playwright test example.spec.ts  --project=chromium --workers=1 --config playwright.config.dev.ts"
   },
   "keywords": [],
   "author": "",

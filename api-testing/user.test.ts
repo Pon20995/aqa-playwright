@@ -13,15 +13,19 @@ describe("tests for users", () => {
     baseURL: `${jsonData.baseUrl}`,
   });
   apiClient.interceptors.request.use(function (config) {
+    config.headers.Authorization = `Bearer ${jsonData.token}`;
     console.log("Request URL:", `${config.baseURL}${config.url}`);
     return config;
   });
 
   test("GET current user", async () => {
     let currentUserData = await apiClient
-      .get(`/user/me`, {
-        headers: { Authorization: `Bearer ${jsonData.token}` },
-      })
+      .get(
+        `/user/me`
+        //   , {
+        //   headers: { Authorization: `Bearer ${jsonData.token}` },
+        // }
+      )
       .then(function (response) {
         console.log(response.data);
         console.log(response.status);

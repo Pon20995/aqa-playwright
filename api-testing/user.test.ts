@@ -51,7 +51,7 @@ describe("tests for users", () => {
   });
 
   test("GET current user with expect", async () => {
-    let responseT = await axios.get(`${jsonData.baseUrl}/userRRR/me`, {
+    let responseT = await axios.get(`${jsonData.baseUrl}/user/me`, {
       headers: { Authorization: `Bearer ${jsonData.token}` },
     });
     expect(responseT.status).toBe(200);

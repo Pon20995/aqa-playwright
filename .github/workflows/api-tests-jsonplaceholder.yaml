@@ -1,0 +1,22 @@
+name: Api tests for jsonplaceholder website
+on:
+  push:
+    branches:
+      - github-actions-hw
+  pull_request:
+    branches:
+      - "github-actions-hw"
+      - "!hot-fix/*"
+      - "!main"
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Add node
+        uses: actions/setup-node@v4
+      - name: Install dependencies
+        run: npm ci
+      - name: Run api Tests
+        run: npm run run-playwright-tests-api

@@ -1,9 +1,8 @@
 name: Playwright tests on docker image
 on:
-  #push:
-  # branches:
-  #  - actions-playwright-docker
-  workflow_dispatch
+  push:
+    branches:
+      - actions-playwright-docker
 jobs:
   test:
     runs-on: ubuntu-latest

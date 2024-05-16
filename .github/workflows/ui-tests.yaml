@@ -2,10 +2,10 @@ name: Ui tests
 on:
   push:
     branches:
-      - actions-playwright
+      - actions-playwright-docker
   pull_request:
     branches:
-      - "actions-playwright"
+      - "actions-playwright-docker"
       - "!hot-fix/*"
       - "!main"
 jobs:
@@ -21,4 +21,10 @@ jobs:
       - name: Browser Chromium
         run: npx playwright install chromium --with-deps
       - name: Run playwright test
-        run: npm run run-playwright-tests-with-config
+        run: npm run run-playwright-tests
+        env:
+          ENV_URL: ${{ secrets.ENV_URL }}
+          HTTP_CREDENTIALS_USERNAME: ${{ secrets.HTTP_CREDENTIALS_USERNAME }}
+          HTTP_CREDENTIALS_PASSWORD: ${{ secrets.HTTP_CREDENTIALS_PASSWORD }}
+          LOGIN_USERNAME: ${{ secrets.LOGIN_USERNAME }}
+          LOGIN_PASS: ${{ secrets.LOGIN_PASS }}

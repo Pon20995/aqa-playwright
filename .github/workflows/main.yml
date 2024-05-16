@@ -12,4 +12,4 @@ jobs:
 
     steps: 
       - name: Echo variable
-        run: echo ${{env.ENV_URL}}
+        run: env

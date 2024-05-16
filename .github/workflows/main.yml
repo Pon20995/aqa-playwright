@@ -12,4 +12,4 @@ jobs:
 
     steps: 
       - name: Echo variable
-        run: env
+        run: echo ${{ secrets.ENV_URL }}

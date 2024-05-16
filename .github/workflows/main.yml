@@ -1,0 +1,15 @@
+name: check secrets * variables
+
+on:
+  push:
+    branches: env
+  pull_request:
+    branches: env
+
+jobs:
+  reading-variables:
+    runs-on: ubuntu-latest
+
+    steps: 
+      - name: Echo variable
+        run: echo ${{env.ENV_URL}}
